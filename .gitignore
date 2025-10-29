@@ -1,2 +1,3 @@
 .venv
-telegram_key.py
+*secret.py
+*__pycache__*
