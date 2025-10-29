@@ -1,0 +1,12 @@
+docker run --name my-mongodb \
+-v ~/mongo-data:/data/db \
+-e MONGO_INITDB_ROOT_USERNAME=admin \
+-e MONGO_INITDB_ROOT_PASSWORD=secret \
+-p 27017:27017 \
+-d mongo:latest
+
+docker stop my-mongodb
+docker start my-mongodb
+
+database link
+mongodb://admin:secret@localhost:27017/
