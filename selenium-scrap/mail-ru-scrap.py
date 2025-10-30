@@ -83,8 +83,68 @@ def send_login_form(driver) -> None:
     time.sleep(2)
     other_method_btn.click()
 
-    time.sleep(100)
+    # переходим на форму ввода reserveCode
+    reserve_code_btn_path: Final[str] = '//div[@role="dialog"]//div[@data-test-id="verificationMethod_reserve_code"]'
+    WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.XPATH, reserve_code_btn_path)))
+    reserve_code_btn = driver.find_element(By.XPATH, reserve_code_btn_path)
 
+    time.sleep(2)
+    reserve_code_btn.click()
+
+    # вводим код
+    WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.ID, 'otp')))
+    reserve_code_inp = driver.find_element(By.ID, 'otp')
+
+    reserve_code_inp.send_keys(secret.RESERVE_CODE)
+
+    # жмём кнопку Continue
+    submit_btn_path: Final[str] = '//button[@type="submit"]'
+    WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.XPATH, submit_btn_path)))
+    submit_btn = driver.find_element(By.XPATH, submit_btn_path)
+
+    time.sleep(2)
+    submit_btn.click()
+
+    # форма Enter Your Password
+    # Водим пароль
+    pass_inp_path: Final[str] = '//input[@name="password"]'
+    WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.XPATH, pass_inp_path)))
+    pass_inp = driver.find_element(By.XPATH, pass_inp_path)
+
+    time.sleep(1)
+    pass_inp.send_keys(secret.PASS)
+
+    submit_btn_path: Final[str] = '//button[@type="submit"]'
+    WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.XPATH, submit_btn_path)))
+    submit_btn = driver.find_element(By.XPATH, submit_btn_path)
+
+    time.sleep(2)
+    submit_btn.click()
+
+def parse_inbox(driver)->None:
+    '''
+    https://e.mail.ru/inbox/
+    '''
+
+    time.sleep(2)
+
+    driver.get('https://e.mail.ru/sent/inbox/')
+    time.sleep(10)
+
+def parse_sent(driver)->None:
+    '''
+    https://e.mail.ru/sent/
+    '''
+
+    time.sleep(2)
+
+    driver.get('https://e.mail.ru/sent/')
+    time.sleep(10)
 
 driver = webdriver.Chrome()
 driver.get("https://mail.ru")
@@ -93,12 +153,11 @@ start_page_login(driver)
 
 send_login_form(driver)
 
-# login.send_keys('admin')
-# password.send_keys('admin')
+# https://e.mail.ru/inbox/
+parse_inbox(driver)
 
-
-# secret.LOGIN
-# secret.PASS
+# https://e.mail.ru/sent/
+parse_sent(driver)
 
 time.sleep(30)
 
