@@ -1,6 +1,6 @@
 import time
 from typing import Final
-
+import json
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -68,7 +68,7 @@ def send_login_form(driver) -> None:
         EC.presence_of_element_located((By.XPATH, submit_btn_path)))
     submit_btn = driver.find_element(By.XPATH, submit_btn_path)
 
-    time.sleep(2)
+    time.sleep(3)
     submit_btn.click()
 
     driver.switch_to.default_content()
@@ -80,7 +80,7 @@ def send_login_form(driver) -> None:
         EC.presence_of_element_located((By.XPATH, other_method_btn_path)))
     other_method_btn = driver.find_element(By.XPATH, other_method_btn_path)
 
-    time.sleep(2)
+    time.sleep(3)
     other_method_btn.click()
 
     # переходим на форму ввода reserveCode
@@ -89,7 +89,7 @@ def send_login_form(driver) -> None:
         EC.presence_of_element_located((By.XPATH, reserve_code_btn_path)))
     reserve_code_btn = driver.find_element(By.XPATH, reserve_code_btn_path)
 
-    time.sleep(2)
+    time.sleep(3)
     reserve_code_btn.click()
 
     # вводим код
@@ -105,7 +105,7 @@ def send_login_form(driver) -> None:
         EC.presence_of_element_located((By.XPATH, submit_btn_path)))
     submit_btn = driver.find_element(By.XPATH, submit_btn_path)
 
-    time.sleep(2)
+    time.sleep(3)
     submit_btn.click()
 
     # форма Enter Your Password
@@ -115,7 +115,7 @@ def send_login_form(driver) -> None:
         EC.presence_of_element_located((By.XPATH, pass_inp_path)))
     pass_inp = driver.find_element(By.XPATH, pass_inp_path)
 
-    time.sleep(1)
+    time.sleep(3)
     pass_inp.send_keys(secret.PASS)
 
     submit_btn_path: Final[str] = '//button[@type="submit"]'
@@ -123,28 +123,54 @@ def send_login_form(driver) -> None:
         EC.presence_of_element_located((By.XPATH, submit_btn_path)))
     submit_btn = driver.find_element(By.XPATH, submit_btn_path)
 
-    time.sleep(2)
+    time.sleep(3)
     submit_btn.click()
 
-def parse_inbox(driver)->None:
+
+def parse_inbox(driver) -> None:
     '''
     https://e.mail.ru/inbox/
     '''
 
     time.sleep(2)
 
-    driver.get('https://e.mail.ru/sent/inbox/')
-    time.sleep(10)
+    driver.execute_script('window.location.assign("https://e.mail.ru/inbox/")')
 
-def parse_sent(driver)->None:
+    time.sleep(2)
+
+    # список писем
+    lst = []
+    for m in driver.find_elements(By.XPATH, '//a[contains(@class, "llc_new")]'):
+        #  переходим на страничку с письмом
+        href = m.get_attribute('href')
+
+        lst.append({"href": href})
+
+    for m in lst:
+        driver.execute_script(
+            f'window.location.assign("{m["href"]}")')
+
+        letter_from_path = '//div[@class="letter__author"]/span[@class="letter-contact"]'
+        WebDriverWait(driver, 1030).until(
+            EC.presence_of_element_located((By.XPATH, letter_from_path)))
+        letter_from = driver.find_element(By.XPATH, letter_from_path)
+
+        m['from'] = letter_from.get_attribute('title')
+
+    with open("inbox.json", "w") as f:
+        json.dump(lst, f, indent=4)
+
+
+def parse_sent(driver) -> None:
     '''
     https://e.mail.ru/sent/
     '''
 
     time.sleep(2)
 
-    driver.get('https://e.mail.ru/sent/')
+    driver.execute_script('window.location.assign("https://e.mail.ru/sent/")')
     time.sleep(10)
+
 
 driver = webdriver.Chrome()
 driver.get("https://mail.ru")

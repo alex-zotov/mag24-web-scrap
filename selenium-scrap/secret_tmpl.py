@@ -1,0 +1,3 @@
+LOGIN = ''
+RESERVE_CODE = ''
+PASS = ''
