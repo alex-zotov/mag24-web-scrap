@@ -1,4 +1,4 @@
-# Scrapy settings for test project
+# Scrapy settings for football24 project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,16 +7,16 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "test"
+BOT_NAME = "football24"
 
-SPIDER_MODULES = ["test.spiders"]
-NEWSPIDER_MODULE = "test.spiders"
+SPIDER_MODULES = ["football24.spiders"]
+NEWSPIDER_MODULE = "football24.spiders"
 
 ADDONS = {}
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "test (+http://www.yourdomain.com)"
+#USER_AGENT = "football24 (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
@@ -30,7 +30,7 @@ DOWNLOAD_DELAY = 4
 ITEM_PIPELINES = {
     #'myproject.pipelines.MongoPipeline': 300,
     # 300 приоритет обработки этого pipeLine (0..1000)
-    'test.pipelines.MongoPipeline': 300,
+    'football24.pipelines.MongoPipeline': 300,
 }
 
 MONGO_URI = 'mongodb://admin:secret@localhost:27017'
@@ -51,13 +51,13 @@ MONGO_DATABASE ='scrapy_items'
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "test.middlewares.TestSpiderMiddleware": 543,
+#    "football24.middlewares.Football24SpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "test.middlewares.TestDownloaderMiddleware": 543,
+#    "football24.middlewares.Football24DownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -69,7 +69,7 @@ MONGO_DATABASE ='scrapy_items'
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "test.pipelines.TestPipeline": 300,
+#    "football24.pipelines.Football24Pipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

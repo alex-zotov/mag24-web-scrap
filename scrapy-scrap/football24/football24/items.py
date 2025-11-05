@@ -6,7 +6,7 @@
 import scrapy
 
 
-class TestItem(scrapy.Item):
+class Football24Item(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass

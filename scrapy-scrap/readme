@@ -1,0 +1,40 @@
+pip install scrapy
+
+парсим две странички новостей сайта
+https://football24.ru
+кладём список новостей в директорию ./data (корень проекта ./football24)
+и в mongoDB
+есть проверка, что кладём в базу только новые статьи
+
+создать проект scrapy
+scrapy startproject football24 (создаст новую директорию)
+
+переходим в корень проекта scrapy уже там запускаем пауков (у нас он один football24_spyder.py)
+
+===
+изменения в проекте
+===
+./football24/settings.py : 
+DOWNLOAD_DELAY = 4
+ROBOTSTXT_OBEY = False
+ITEM_PIPELINES
+MONGO_URI, MONGO_DATABASE
+
+pipeline to mongo
+./football24/pipelines.py : 
+проверка дубликата перед вставкой
+
+football24_spyder.py
+MONGO_COLLECTION_NAME
+
+===
+интерактивная оболочка scrapy
+scrapy shell "https://football24.ru/articles/page/2/"
+
+получить коллекцию объектов
+response.xpath('//*[@id="dle-content"]/article').getall()
+
+получить конкретный объект
+article = response.xpath('//*[@id="dle-content"]/article[1]')
+article.xpath('//*[@itemprop="headline"]//a/@href').get()
+
