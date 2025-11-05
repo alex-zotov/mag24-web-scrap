@@ -127,16 +127,7 @@ def send_login_form(driver) -> None:
     submit_btn.click()
 
 
-def parse_inbox(driver) -> None:
-    '''
-    https://e.mail.ru/inbox/
-    '''
-
-    time.sleep(2)
-
-    driver.execute_script('window.location.assign("https://e.mail.ru/inbox/")')
-
-    time.sleep(2)
+def parse_list(driver) -> list[dict]:
 
     # список писем
     lst = []
@@ -150,12 +141,46 @@ def parse_inbox(driver) -> None:
         driver.execute_script(
             f'window.location.assign("{m["href"]}")')
 
+        subject_path = '//h2[@class="thread-subject"]'
+        WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, subject_path)))
+        subject = driver.find_element(By.XPATH, subject_path)
+
         letter_from_path = '//div[@class="letter__author"]/span[@class="letter-contact"]'
-        WebDriverWait(driver, 1030).until(
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.XPATH, letter_from_path)))
         letter_from = driver.find_element(By.XPATH, letter_from_path)
 
+        letter_to_path = '//div[contains(@class,"letter__recipients")]/span[@class="letter-contact"]'
+        WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, letter_to_path)))
+        letter_to = driver.find_element(By.XPATH, letter_to_path)
+
+        body_path = '//div[@class="letter__body"]'
+        WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, body_path)))
+        body = driver.find_element(By.XPATH, body_path)
+
         m['from'] = letter_from.get_attribute('title')
+        m['to'] = letter_to.get_attribute('title')
+        m['subject'] = subject.get_attribute("innerHTML")
+        m['body'] = body.get_attribute("innerHTML")
+
+    return lst
+
+
+def parse_inbox(driver) -> None:
+    '''
+    https://e.mail.ru/inbox/
+    '''
+
+    time.sleep(2)
+
+    driver.execute_script('window.location.assign("https://e.mail.ru/inbox/")')
+
+    time.sleep(2)
+
+    lst = parse_list(driver)
 
     with open("inbox.json", "w") as f:
         json.dump(lst, f, indent=4)
@@ -169,7 +194,14 @@ def parse_sent(driver) -> None:
     time.sleep(2)
 
     driver.execute_script('window.location.assign("https://e.mail.ru/sent/")')
-    time.sleep(10)
+
+    time.sleep(2)
+
+    lst = parse_list(driver)
+
+    with open("sent.json", "w") as f:
+        json.dump(lst, f, indent=4)
+
 
 
 driver = webdriver.Chrome()
