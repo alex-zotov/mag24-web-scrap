@@ -1,3 +1,5 @@
+ipykernel
+telethon
 scrapy
 pymongo
 selenium

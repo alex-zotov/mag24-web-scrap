@@ -1,3 +1,6 @@
 .venv
-*secret.py
 *__pycache__*
+vk-api/vk_key.py
+selenium-scrap/secret.py
+telegram-api/telegram_key.py
+telegram-api/anon.session
