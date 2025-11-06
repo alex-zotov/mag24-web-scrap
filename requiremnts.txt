@@ -5,3 +5,4 @@ pymongo
 selenium
 beautifulsoup4
 lxml
+pymongo

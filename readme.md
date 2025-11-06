@@ -11,6 +11,9 @@
 
 **lxml xpath** Выгрузить новости football24.ru в json [./lxml-scrap/2025-10-16-lxml.ipynb](./lxml-scrap/2025-10-16-lxml.ipynb)
 
+**xpath mongo** Выгрузить новости football24.ru в mongoDB. Загружать только новые статьи. 
+Попросить из базы статьи за последние два дня [./lxml-mongo-scrap/lxml-mongo.ipynb](./lxml-mongo-scrap/lxml-mongo.ipynb)
+
 **SCRAPY.** Парсинг football24.ru [scrapy-scrap](./scrapy-scrap/)
 
 **Selenium.** Парсинг почты maill.ru [selenium-scrap](./selenium-scrap/)
