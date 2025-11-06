@@ -9,6 +9,8 @@
 
 **bs4** Выгрузить новости football24.ru в json [./bs4-scrap/2025-10-16-bs4.ipynb](./bs4-scrap/2025-10-16-bs4.ipynb)
 
+**lxml xpath** Выгрузить новости football24.ru в json [./lxml-scrap/2025-10-16-lxml.ipynb](./lxml-scrap/2025-10-16-lxml.ipynb)
+
 **SCRAPY.** Парсинг football24.ru [scrapy-scrap](./scrapy-scrap/)
 
 **Selenium.** Парсинг почты maill.ru [selenium-scrap](./selenium-scrap/)
