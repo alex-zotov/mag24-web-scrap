@@ -5,7 +5,9 @@
 
 **vk-api** Библиотека requests. Получить список групп пользователя. Сообщения на стене. [./vk-api/vk.ipynb](./vk-api/vk.ipynb)
 
-**telegram-api** ПОлучить сообщения канала и сообщения чата [./telegram-api/telegram.ipynb](./telegram-api/telegram.ipynb)
+**telegram-api** Получить сообщения канала и сообщения чата [./telegram-api/telegram.ipynb](./telegram-api/telegram.ipynb)
+
+**bs4** Выгрузить новости football24.ru в json [./bs4-scrap/2025-10-16-bs4.ipynb](./bs4-scrap/2025-10-16-bs4.ipynb)
 
 **SCRAPY.** Парсинг football24.ru [scrapy-scrap](./scrapy-scrap/)
 
