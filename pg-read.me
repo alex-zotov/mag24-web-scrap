@@ -1,0 +1,21 @@
+docker pull postgres
+
+# будет инициализирована база стандартный админ postgers
+docker run --name study24-postgres-db \
+-e POSTGRES_PASSWORD=password \
+-e POSTGRES_DB=study24 \
+-p 5432:5432 \
+-v $HOME/pg-data/study24:/var/lib/postgresql \
+-d \
+postgres
+
+-d : Run container in background and print container ID
+postger : image
+
+docker logs 4b
+
+docker start 4b
+
+docker attach 4b
+
+$psql

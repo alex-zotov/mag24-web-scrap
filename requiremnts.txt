@@ -6,3 +6,6 @@ selenium
 beautifulsoup4
 lxml
 pymongo
+
+#pg
+psycopg2-binary

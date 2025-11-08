@@ -14,6 +14,9 @@
 **xpath mongo** Выгрузить новости football24.ru в mongoDB. Загружать только новые статьи. 
 Попросить из базы статьи за последние два дня [./lxml-mongo-scrap/lxml-mongo.ipynb](./lxml-mongo-scrap/lxml-mongo.ipynb)
 
+**xpath pg** Выгрузить новости football24.ru в postgres. Загружать только новые статьи. 
+Попросить из базы статьи за последние два дня [./lxml-pg-scrap/lxml-pg.ipynb](./lxml-pg-scrap/lxml-pg.ipynb)
+
 **SCRAPY.** Парсинг football24.ru [scrapy-scrap](./scrapy-scrap/)
 
 **Selenium.** Парсинг почты maill.ru [selenium-scrap](./selenium-scrap/)
